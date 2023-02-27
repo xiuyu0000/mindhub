@@ -25,7 +25,7 @@ class Model:
             else:
                 raise ModuleNotFoundError
         elif source == "mindface":
-            # 过程类似加载
+            # 加载过程类似mindcv
             pass
         elif source == "resource":
             model = cls.init_with_name(name=name, pretrained=pretrained, **kwargs)
