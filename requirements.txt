@@ -1,0 +1,4 @@
+mindcv==0.1.1
+mindface
+mindnlp
+download
