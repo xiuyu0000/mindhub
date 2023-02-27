@@ -29,7 +29,7 @@ class CrossEntropySmooth(LossBase):
         loss = self.ce(logit, label)
         return loss
 
-
+@modelinfo
 class TinyDarkNetImageNet:
     """TinyDarkNet infer by using ImageNet data."""
     def __init__(self,
