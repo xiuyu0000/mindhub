@@ -1,4 +1,7 @@
 from typing import Optional
+from registry import _local_models
+
+__all__ = ["Model"]
 
 
 class Model:
@@ -18,10 +21,20 @@ class Model:
                 diretory: Optional[str] = None,
                 **kwargs
                 ):
+        cls._models_from_url = cls._check_remote_models()
+        cls._models_from_local = _local_models
+
         if diretory:
             model = cls._init_with_diretory(diretory, pretrained, **kwargs)
         elif model_name:
-            model_path = cls._search_model(model_name, pretrained, **kwargs)
+
+            if model_name not in cls._models_from_local:
+                if model_name not in cls._models_from_url:
+                    raise FileNotFoundError
+                cls.install_model(model_name)
+
+            model_path = cls._search_model(model_name, pretrained)
+            model = cls._init_with_diretory(model_path, pretrained, **kwargs)
         else:
             raise TypeError
 
@@ -50,7 +63,16 @@ class Model:
             model_name(str): 模型名称+规格+使用数据集.
         """
         pass
-    
+
+    @classmethod
+    def _check_remote_models(cls):
+        """
+        查看远程仓库已存在的模型
+        Returns:
+
+        """
+        pass
+
     @classmethod
     def _search_model(cls,
                      model_name: str

@@ -1,4 +1,7 @@
 
+__all__ = ['register_model_info',
+           'list_models']
+
 _local_models = dict()
 
 def register_model_info(
