@@ -8,7 +8,8 @@ from mindhub.utils.download import DownLoad
 from mindhub.env import GITHUB_REPO_URL
 
 __all__ = ['register_model_info',
-           'list_models']
+           'list_models',
+           'load_local_model']
 
 _local_models = dict()
 

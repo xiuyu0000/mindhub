@@ -1,28 +1,34 @@
 from typing import Optional
-from registry import _local_models
+
+from mindhub.utils import DownLoad
+from mindhub.models.registry import list_models
+from mindhub.env import GITHUB_REPO_URL
 
 __all__ = ["Model"]
 
 
 class Model:
-    '''
-    模型加载，可以通过两种方式来进行加载。
-    1. 加载mresource文件夹中的模型。
-    2. 加载套件的模型.
-
-    Args:
-        model_name(str): 模型名称+规格+使用数据.
-        pretrained(bool): 加载我们训练好的精度达标的模型预训练权重.
-        diretory(str): 加载本地的模型文件的路径.
-    '''
+    """
+    安装，卸载，加载模型
+    """
     def __new__(cls,
                 model_name: Optional[str] = None,
                 pretrained: bool = False,
                 diretory: Optional[str] = None,
                 **kwargs
                 ):
+        """
+        模型加载，可以通过两种方式来进行加载。
+        1. 加载mresource文件夹中的模型。
+        2. 加载套件的模型.
+
+        Args:
+            model_name(str): 模型名称+规格+使用数据.
+            pretrained(bool): 加载我们训练好的精度达标的模型预训练权重.
+            diretory(str): 加载本地的模型文件的路径.
+        """
         cls._models_from_url = cls._check_remote_models()
-        cls._models_from_local = _local_models
+        cls._models_from_local = list_models(exclude_filter="")
 
         if diretory:
             model = cls._init_with_diretory(diretory, pretrained, **kwargs)
@@ -69,9 +75,14 @@ class Model:
         """
         查看远程仓库已存在的模型
         Returns:
+            List, the list of models in
 
         """
-        pass
+        remote_models_list = [file_info["name"]
+                       for file_info in DownLoad().list_remote_files(GITHUB_REPO_URL)
+                       if file_info["type"] == "dir"]
+
+        return remote_models_list
 
     @classmethod
     def _search_model(cls,
@@ -83,7 +94,7 @@ class Model:
         Args:
             model_name(str): 模型名称+规格+使用数据集.
         """
-        pass
+
 
     @classmethod
     def _load_model_info(cls,
