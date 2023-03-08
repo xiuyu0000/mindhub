@@ -10,6 +10,8 @@ from mindspore.nn.loss.loss import LossBase
 from mindspore.ops import functional as F
 from mindspore.ops import operations as P
 
+from mindhub.models.registry import register_model_info
+
 from model import TinyDarkNet
 
 
@@ -29,17 +31,18 @@ class CrossEntropySmooth(LossBase):
         loss = self.ce(logit, label)
         return loss
 
-@modelinfo
+# @register_model_info(model_name="tinydarknet_imagenet",
+#                      type="image/classification")
 class TinyDarkNetImageNet:
     """TinyDarkNet infer by using ImageNet data."""
     def __init__(self,
-                model_name: str = "tinydarknet",
+                model_name: str = "tinydarknet_imagenet",
                 pretrained: bool = False,
                 num_classes: int = 1000,
                 in_channel: int = 3,
                 label_smooth_factor: float = 0.1):
 
-        self.network = TinyDarkNet(in_channel, num_classes) if model_name == "tinydarknet" else None
+        self.network = TinyDarkNet(in_channel, num_classes) if model_name == "tinydarknet_imagenet" else None
         self.ckpt_url = "https://download.mindspore.cn/models/r1.9/tinydarknet_ascend_v190_imagenet2012" \
                         "_official_cv_top1acc59.0_top5acc81.84.ckpt"
         self.ckpt_path = "./tinydarknet_ascend_v190_imagenet2012_official_cv" \

@@ -12,7 +12,7 @@ import urllib.request
 import requests
 import zipfile
 from copy import deepcopy
-from typing import Optional
+from typing import Optional, List
 
 from tqdm import tqdm
 
@@ -41,10 +41,10 @@ def set_default_download_root(path):
 class DownLoad:
     """Base utility class for downloading."""
 
-    USER_AGENT: str = (
+    HEADER: dict = {"User-Agent": (
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/92.0.4515.131 Safari/537.36"
-    )
+    )}
 
     @staticmethod
     def calculate_md5(file_path: str, chunk_size: int = 1024 * 1024) -> str:
@@ -105,11 +105,10 @@ class DownLoad:
     def download_file(self, url: str, file_path: str, chunk_size: int = 1024):
         """Download a file."""
         # Define request headers.
-        headers = {"User-Agent": self.USER_AGENT}
 
         _logger.info(f"Downloading from {url} to {file_path} ...")
         with open(file_path, "wb") as f:
-            request = urllib.request.Request(url, headers=headers)
+            request = urllib.request.Request(url, headers=self.HEADER)
             with urllib.request.urlopen(request) as response:
                 with tqdm(total=response.length, unit="B") as pbar:
                     for chunk in iter(lambda: response.read(chunk_size), b""):
@@ -182,6 +181,17 @@ class DownLoad:
         if remove_finished:
             os.remove(archive)
 
+    def list_remote_files(self, repo_url: str) -> List:
+        response =requests.get(repo_url, headers=self.HEADER)
+
+        if response.status_code == 404:
+            raise ValueError(f"repository {repo_url} is not vaild")
+
+        if response.status_code != 200:
+            raise ValueError(f"Failed to get file list from repository {repo_url}")
+
+        return response.json()
+
     def download_github_folder(self,
                                folder_path: str,
                                download_path: Optional[str] = None,
@@ -200,26 +210,18 @@ class DownLoad:
             download_path = get_default_download_root()
         download_path = os.path.join(os.path.expanduser(download_path), folder_path)
 
-        headers = {"User-Agent": self.USER_AGENT}
-
         # 解析仓库地址和文件夹路径
         repo_url = urllib.parse.urljoin(GITHUB_REPO_URL, folder_path)
 
         # 获取文件列表
-        response =requests.get(repo_url, headers=headers)
-        if response.status_code == 404:
-            raise ValueError(f"Folder {folder_path} not found in repository {repo_url}")
-        if response.status_code != 200:
-            raise ValueError(f"Failed to get file list from repository {repo_url}")
-        file_list = response.json()
+        file_list = self.list_remote_files(repo_url)
 
         # 下载文件
         os.makedirs(download_path, exist_ok=True)
         for file_info in file_list:
             if file_info["type"] == "file":
                 file_url = file_info["download_url"]
-                file_path = os.path.join(download_path, file_info["name"])
-                self.download_url(file_url, file_path)
+                self.download_url(file_url, download_path)
             elif file_info["type"] == "dir":
                 subfolder_path = os.path.join(folder_path, file_info["name"])
                 subfolder_download_path = os.path.join(download_path, file_info["name"])
@@ -229,4 +231,4 @@ class DownLoad:
 
 if __name__ == "__main__":
     download = DownLoad()
-    download.download_github_folder("tinydarknet")
+    download.download_github_folder("tinydarknet_imagenet")
