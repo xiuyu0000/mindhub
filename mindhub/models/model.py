@@ -1,7 +1,7 @@
 from typing import Optional
 
 from mindhub.utils import DownLoad
-from mindhub.models.registry import list_models
+from mindhub.models.registry import _local_models
 from mindhub.env import GITHUB_REPO_URL
 
 __all__ = ["Model"]
@@ -11,6 +11,9 @@ class Model:
     """
     安装，卸载，加载模型
     """
+    _models_from_url = None
+    _models_from_local = _local_models.keys()
+
     def __new__(cls,
                 model_name: Optional[str] = None,
                 pretrained: bool = False,
@@ -28,7 +31,6 @@ class Model:
             diretory(str): 加载本地的模型文件的路径.
         """
         cls._models_from_url = cls._check_remote_models()
-        cls._models_from_local = list_models(exclude_filter="")
 
         if diretory:
             model = cls._init_with_diretory(diretory, pretrained, **kwargs)

@@ -17,7 +17,7 @@ from typing import Optional, List
 from tqdm import tqdm
 
 from mindhub.env import GITHUB_REPO_URL
-from path import detect_file_type
+from mindhub.utils.path import detect_file_type
 
 __all__ = [
     "DownLoad",

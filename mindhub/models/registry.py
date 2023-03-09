@@ -1,17 +1,19 @@
 import os
 import sys
+
+import difflib
 from importlib.util import spec_from_file_location, module_from_spec
 
-from typing import Generic
-
-from mindhub.utils.download import DownLoad
-from mindhub.env import GITHUB_REPO_URL
-
-__all__ = ['register_model_info',
-           'list_models',
-           'load_local_model']
+__all__ = [
+    'register_model',
+    'list_models_info',
+    'load_local_model',
+    'local_models',
+    'local_models_info'
+]
 
 _local_models = dict()
+_local_models_info = dict()
 
 
 def load_local_model(module_name: str,
@@ -25,46 +27,67 @@ def load_local_model(module_name: str,
     model_module = module_from_spec(spec)
     spec.loader.exec_module(model_module)
 
-    model = model_module[module_name]
+    # model = getattr(model_module, module_name, None)
 
     sys.path.pop(0)
 
-    return model
+    # return model
 
 
-def register_model_info(model_name: str,
-                        pretrained: bool = False,
-                        paper: str = "",
-                        model_type: str = "",
-                        ):
+def register_model(model_name: str,
+                   pretrained: bool = False,
+                   paper: str = "",
+                   model_type: str = "",
+                   ):
     """
-    将需要执行的类进行注册.
+    Register the class or method of the model to local models registry.
 
     Args:
-       model_name(str): 需要注册的模型名称+规格+数据集.
-       pretrained(bool): 是否存在可加载的预训练模型.
-       paper(str): 模型的原论文名称，方便用户区分简称相同的不同模型。
-       model_type(str): 所属领域/子领域
+        model_name(str): The name of model.
+        pretrained(bool): Whether the model have pre-trained model. Default: False.
+        paper(str): The name of paper of the model. Default: ''.
+        model_type(str): The domain of the model. Default: ''.
     """
+    def decorator(cls):
+        _local_models[model_name] = cls
+        _local_models_info[model_name] = \
+            {"model_name": model_name,
+             "pretrained": pretrained,
+             "paper": paper,
+             "model_type": model_type}
+        return cls
 
-    # 注册模型信息
-    def _wrapper(cls: Generic) -> Generic:
-       pass
-
-    return _wrapper
+    return decorator
 
 
-def list_models(
-               filter: str,
-               exclude_filter: str,
-               pretrain: bool = False,
-               ):
+def local_models(model_name: str):
+    """The local models."""
+    return _local_models[model_name]
+
+
+def local_models_info(model_name: str):
+    """The info of local models"""
+    return _local_models_info[model_name]
+
+
+def list_models_info(model_name_filter: str,
+                     pretrained: bool = False,
+                     ):
     """
-    模糊匹配符合条件的模型并打印符合条件的模型列表.
+    Searching models which meet the condition.
     
     Args:
-      filter(str): 模型检索，支持通配符过滤器.
-      exclude_filter(str): 检索除通配符过滤器之外的所有模型.
-      pretrained(bool): 当为True时，只检索出有预训练权重的模型.
+      model_name_filter(str): The possible name of model.
+      pretrained(bool): Whether to require the wanted model to have pre-trained model.
     """
-    pass
+    matched_models = [
+        m for m in difflib.get_close_matches(model_name_filter, _local_models.keys(), n=1, cutoff=0.5)
+        if _local_models_info[m]["pretrained"] or not pretrained
+    ]
+
+    if not matched_models:
+        return None
+
+    print(f"Matching model: {matched_models}")
+    models_info = {m: _local_models_info[m] for m in matched_models}
+    return models_info
