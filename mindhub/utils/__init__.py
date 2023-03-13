@@ -1,6 +1,6 @@
 from . import download, path
 
-from .download import DownLoad
+from .download import DownLoad, set_default_download_root, get_default_download_root
 from .path import detect_file_type
 
 __all__ = []

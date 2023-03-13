@@ -20,6 +20,8 @@ from mindhub.env import GITHUB_REPO_URL
 from mindhub.utils.path import detect_file_type
 
 __all__ = [
+    "get_default_download_root",
+    "set_default_download_root",
     "DownLoad",
 ]
 
@@ -118,12 +120,12 @@ class DownLoad:
                         f.write(chunk)
 
     def download_url(
-        self,
-        url: str,
-        path: Optional[str] = None,
-        filename: Optional[str] = None,
-        md5: Optional[str] = None,
-    ) -> None:
+            self,
+            url: str,
+            path: Optional[str] = None,
+            filename: Optional[str] = None,
+            md5: Optional[str] = None,
+            ) -> None:
         """Download a file from a url and place it in root."""
         if path is None:
             path = get_default_download_root()
@@ -157,14 +159,14 @@ class DownLoad:
                 raise e
 
     def download_and_extract_archive(
-        self,
-        url: str,
-        download_path: Optional[str] = None,
-        extract_path: Optional[str] = None,
-        filename: Optional[str] = None,
-        md5: Optional[str] = None,
-        remove_finished: bool = False,
-    ) -> None:
+            self,
+            url: str,
+            download_path: Optional[str] = None,
+            extract_path: Optional[str] = None,
+            filename: Optional[str] = None,
+            md5: Optional[str] = None,
+            remove_finished: bool = False,
+    ) -> str:
         """Download and extract archive."""
         if download_path is None:
             download_path = get_default_download_root()
@@ -181,8 +183,10 @@ class DownLoad:
         if remove_finished:
             os.remove(archive)
 
+        return download_path
+
     def list_remote_files(self, repo_url: str) -> List:
-        response =requests.get(repo_url, headers=self.HEADER)
+        response = requests.get(repo_url, headers=self.HEADER)
 
         if response.status_code == 404:
             raise ValueError(f"repository {repo_url} is not vaild")
@@ -195,7 +199,7 @@ class DownLoad:
     def download_github_folder(self,
                                folder_path: str,
                                download_path: Optional[str] = None,
-                               ):
+                               ) -> str:
         """
         Download the code of model.
 
@@ -227,6 +231,8 @@ class DownLoad:
                 subfolder_download_path = os.path.join(download_path, file_info["name"])
                 os.makedirs(subfolder_download_path, exist_ok=True)
                 self.download_github_folder(subfolder_path, subfolder_download_path)
+
+        return download_path
 
 
 if __name__ == "__main__":

@@ -16,6 +16,3 @@ if __name__ == "__main__":
     print(model)
 
     sys.path.pop(0)
-
-    # Get the model object from the module
-
