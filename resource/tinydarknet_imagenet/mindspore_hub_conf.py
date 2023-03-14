@@ -1,5 +1,8 @@
 
 """hub config."""
+import os
+import numpy as np
+from typing import List, Dict, Optional, Callable
 from download import download
 
 import mindspore as ms
@@ -11,8 +14,10 @@ from mindspore.ops import functional as F
 from mindspore.ops import operations as P
 
 from mindhub.models.registry import register_model
+from mindhub.utils.path import load_json_file
 
 from model import TinyDarkNet
+from preprocess import create_dataset_imagenet_infer
 
 
 class CrossEntropySmooth(LossBase):
@@ -62,31 +67,32 @@ class TinyDarkNetImageNet:
 
         self.model = Model(self.network, loss_fn=self.loss)
 
-    def infer(self, x: Tensor) -> Tensor:
-        return self.model.predict(x)
+    def infer(self, data_path: str,
+              json_path: str,
+              transform: Optional[Callable] = None,
+              batch_size: int = 1,
+              num_parallel_workers: Optional[int] = None,
+              ) -> List[Dict]:
+
+        if os.path.exists(data_path):
+            print(f"Data Path: {data_path}")
+            dataset = create_dataset_imagenet_infer(data_path, transform, batch_size, num_parallel_workers)
+            print(f"Create Dataset Sucessfully! Dataset Size: {dataset.get_batch_size()}")
+            mapping = load_json_file(json_path)
+
+            outputs = []
+            for image in dataset.create_dict_iterator():
+                image = image["image"]
+                prob = self.model.predict(image)
+                label = np.argmax(prob.asnumpy(), axis=1)
+                output = {int(label): mapping[int(label)]}
+                outputs.append(output)
+        else:
+            raise FileNotFoundError(f"Please check whether the path {data_path} exists!")
+
+        return outputs
 
 
 if __name__ == "__main__":
-    import os
-    import numpy as np
-
-    from preprocess import create_dataset_imagenet
-    from postprocess import index2label
-
-    data_path = "./data/"
-    data_infer_path = os.path.join(data_path, "infer")
-    print("data_path", data_infer_path)
-    dataset = create_dataset_imagenet(data_infer_path)
-    print("Create Dataset Sucessfully!", "Dataset Size:", dataset.get_batch_size())
-    model = TinyDarkNetImageNet(pretrained=True)
-    print("Create Model Sucessfully!")
-
-    for i, image in enumerate(dataset.create_dict_iterator(output_numpy=True)):
-        image = image["image"]
-        image = Tensor(image)
-        prob = model.infer(image)
-        label = np.argmax(prob.asnumpy(), axis=1)
-        # `data_path`路径下要有`ILSVRC2012_devkit_t12`文件夹
-        mapping = index2label(data_path)
-        output = {int(label): mapping[int(label)]}
-        print("output:", output)
+    model = TinyDarkNetImageNet("tinydarknet_imagenet")
+    print(model.infer("/data1/tinydarknet/data/infer/n02090622/", "./label_map.json"))
