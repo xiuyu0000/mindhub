@@ -59,36 +59,26 @@ Tiny-DarkNet是Joseph Chet Redmon等人提出的一个16层的针对于经典的
 ```text
 ./tinydarknet
 ├── data
-│   ├── ILSVRC2012_devkit_t12
-│   │   ├── COPYING
-│   │   ├── data
-│   │   │   ├── ILSVRC2012_validation_ground_truth.txt
-│   │   │   └── meta.mat
-│   │   ├── evaluation
-│   │   │   ├── compute_overlap.m
-│   │   │   ├── demo_eval.m
-│   │   │   ├── demo.val.pred.det.txt
-│   │   │   ├── demo.val.pred.txt
-│   │   │   ├── eval_flat.m
-│   │   │   ├── eval_localization_flat.m
-│   │   │   ├── get_class2node.m
-│   │   │   ├── make_hash.m
-│   │   │   ├── VOCreadrecxml.m
-│   │   │   ├── VOCreadxml.m
-│   │   │   └── VOCxml2struct.m
-│   │   └── readme.txt
-│   └── infer
-│       └── n02090622
-│           └── n02090622_8464.JPEG
+│   └── n02090622_8464.JPEG
 ├── mindspore_hub_conf.py
 ├── model.py
-├── postprocess.py
 ├── preprocess.py
-└── tinydarknet_ascend_v190_imagenet2012_official_cv_top1acc59.0_top5acc81.84.ckpt
+├── label_map.json
+└── README.md
 ```
 
 ### GPU单卡推理示例
 
+- python代码运行
+
+```python
+from mindhub.models.model import Model
+
+net = Model("tinydarknet_imagenet", pretrained=True)
+print(net.infer(data_path="./data/", json_path="./label_map.json"))
+```
+
+- 命令行运行
 ```shell
 python mindspore_hub_conf.py
 ```
