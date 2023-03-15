@@ -4,6 +4,7 @@ import gzip
 import hashlib
 import logging
 import os
+import shutil
 import ssl
 import tarfile
 import urllib
@@ -215,22 +216,27 @@ class DownLoad:
         download_path = os.path.join(os.path.expanduser(download_path), folder_path)
 
         # 解析仓库地址和文件夹路径
+
         repo_url = urllib.parse.urljoin(GITHUB_REPO_URL, folder_path)
 
         # 获取文件列表
         file_list = self.list_remote_files(repo_url)
 
         # 下载文件
-        os.makedirs(download_path, exist_ok=True)
-        for file_info in file_list:
-            if file_info["type"] == "file":
-                file_url = file_info["download_url"]
-                self.download_url(file_url, download_path)
-            elif file_info["type"] == "dir":
-                subfolder_path = os.path.join(folder_path, file_info["name"])
-                subfolder_download_path = os.path.join(download_path, file_info["name"])
-                os.makedirs(subfolder_download_path, exist_ok=True)
-                self.download_github_folder(subfolder_path, subfolder_download_path)
+        try:
+            os.makedirs(download_path, exist_ok=True)
+            for file_info in file_list:
+                if file_info["type"] == "file":
+                    file_url = file_info["download_url"]
+                    self.download_url(file_url, download_path)
+                elif file_info["type"] == "dir":
+                    subfolder_path = os.path.join(folder_path, file_info["name"])
+                    subfolder_download_path = os.path.join(download_path, file_info["name"])
+                    os.makedirs(subfolder_download_path, exist_ok=True)
+                    self.download_github_folder(subfolder_path, subfolder_download_path)
+        except Exception as e:
+            shutil.rmtree(download_path)
+            raise e
 
         return download_path
 

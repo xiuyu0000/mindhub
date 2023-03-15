@@ -71,7 +71,7 @@ class TinyDarkNetImageNet:
               json_path: str,
               transform: Optional[Callable] = None,
               batch_size: int = 1,
-              num_parallel_workers: Optional[int] = None,
+              num_parallel_workers: int = 1,
               ) -> List[Dict]:
 
         if os.path.exists(data_path):
@@ -84,19 +84,9 @@ class TinyDarkNetImageNet:
                 image = image["image"]
                 prob = self.model.predict(image)
                 label = np.argmax(prob.asnumpy(), axis=1)
-                output = {int(label): mapping[int(label)]}
+                output = {str(label[0]): mapping[str(label[0])]}
                 outputs.append(output)
         else:
             raise FileNotFoundError(f"Please check whether the path {data_path} exists!")
 
         return outputs
-
-
-if __name__ == "__main__":
-    from mindhub.models.model import Model
-    from mindhub.utils.download import get_default_download_root
-    Model.remove_model("tinydarknet_imagenet")
-    net = Model("tinydarknet_imagenet", pretrained=True)
-    print(net.infer("/data1/tinydarknet/data/infer/n02090622/",
-                    os.path.join(get_default_download_root(),
-                                 "/tinydarknet_imagenet/label_map.json")))

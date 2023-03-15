@@ -110,4 +110,5 @@ def create_dataset_imagenet_infer(dataset_path: str,
 
 if __name__ == "__main__":
     dataset = create_dataset_imagenet_infer("/data1/tinydarknet/data/infer/n02090622/")
-    print(next(dataset.create_dict_iterator()))
+    for img in dataset.create_dict_iterator():
+        print(img)
