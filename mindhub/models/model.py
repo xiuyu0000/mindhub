@@ -75,16 +75,17 @@ class Model:
         Args:
             model_name(str): 模型名称+规格+使用数据集.
         """
-        if local_models(model_name):
-            default_model_path = os.path.join(get_default_download_root(), model_name)
+        default_model_path = os.path.join(get_default_download_root(), model_name)
 
+        if local_models(model_name):
+            remove_models(model_name)
+
+        if os.path.exists(default_model_path):
             try:
                 shutil.rmtree(default_model_path)
                 print(f"{default_model_path} has been successfully deleted.")
             except OSError as e:
                 print(f"Error deleting {default_model_path}: {e}")
-
-            remove_models(model_name)
         else:
             raise ValueError(f"{model_name} is not in the local models registry.")
 

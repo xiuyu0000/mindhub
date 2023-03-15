@@ -62,9 +62,9 @@ def image_read(image: str) -> np.array:
     Returns:
         ndarray: Loaded image array.
     """
-
     if isinstance(image, pathlib.Path):
         image = str(image)
+
     if isinstance(image, np.ndarray):
         pass
     elif isinstance(image, str):
@@ -72,6 +72,5 @@ def image_read(image: str) -> np.array:
         image = Image.open(image)
     else:
         raise TypeError("Image must be a `ndarray`, `str` or Path object.")
-
 
     return np.asarray(image)

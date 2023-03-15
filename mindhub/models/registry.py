@@ -7,7 +7,6 @@ from importlib.util import spec_from_file_location, module_from_spec
 from mindhub.env import GITHUB_REPO_URL
 from mindhub.utils.download import DownLoad
 
-
 __all__ = [
     "get_remote_models",
     'register_model',
@@ -17,7 +16,6 @@ __all__ = [
     "remove_models",
     'local_models_info'
 ]
-
 
 _local_models = dict()
 _local_models_info = dict()
@@ -121,7 +119,6 @@ def list_models(model_name_filter: str):
 
     if not(local_matched_models or remote_matched_models):
         raise ValueError(f"{model_name_filter} not found in local registry or remote repository.")
-
 
     print(f"Matching local models: {local_matched_models}")
     print(f"Matching remote models: {remote_matched_models}")

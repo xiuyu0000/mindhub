@@ -1,4 +1,3 @@
-
 """hub config."""
 import os
 import numpy as np
@@ -67,7 +66,8 @@ class TinyDarkNetImageNet:
 
         self.model = Model(self.network, loss_fn=self.loss)
 
-    def infer(self, data_path: str,
+    def infer(self,
+              data_path: str,
               json_path: str,
               transform: Optional[Callable] = None,
               batch_size: int = 1,
@@ -77,7 +77,6 @@ class TinyDarkNetImageNet:
         if os.path.exists(data_path):
             print(f"Data Path: {data_path}")
             dataset = create_dataset_imagenet_infer(data_path, transform, batch_size, num_parallel_workers)
-            print(f"Create Dataset Sucessfully! Dataset Size: {dataset.get_batch_size()}")
             mapping = load_json_file(json_path)
 
             outputs = []
@@ -94,5 +93,10 @@ class TinyDarkNetImageNet:
 
 
 if __name__ == "__main__":
-    model = TinyDarkNetImageNet("tinydarknet_imagenet")
-    print(model.infer("/data1/tinydarknet/data/infer/n02090622/", "./label_map.json"))
+    from mindhub.models.model import Model
+    from mindhub.utils.download import get_default_download_root
+    Model.remove_model("tinydarknet_imagenet")
+    net = Model("tinydarknet_imagenet", pretrained=True)
+    print(net.infer("/data1/tinydarknet/data/infer/n02090622/",
+                    os.path.join(get_default_download_root(),
+                                 "/tinydarknet_imagenet/label_map.json")))
