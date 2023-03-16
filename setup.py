@@ -8,5 +8,5 @@ setup(
     license=' Apache-2.0 license',
     author='胡靖松',
     author_email='15959236535@163.com',
-    description='MindSpore模型Hub库'
+    description='The Hub of Models in MindSpore',
 )
