@@ -1,7 +1,7 @@
 
 <div align="center">
 
-![](https://raw.githubusercontent.com/xiuyu0000/mindhub/main/images/mindhub_logo.gif)
+![mindhub_logo](https://raw.githubusercontent.com/xiuyu0000/mindhub/main/images/mindhub_logo.gif)
 
 
 [![license](https://img.shields.io/github/license/xiuyu0000/mindhub.svg)](https://github.com/xiuyu0000/mindhub/blob/main/LICENSE.md)
@@ -9,11 +9,11 @@
 
 [English](README_EN.md) | 中文
 
-[简介](##MindHub简介) |
-[安装](#安装) |
-[快速入门](#快速入门) |
-[教程](#教程) |
-[模型列表](#模型列表) |
+[MindHub简介](##MindHub简介) |
+[安装](##安装) |
+[快速入门](##快速入门) |
+[教程](##教程) |
+[模型列表](##模型列表)
 
 </div>
 
