@@ -1,6 +1,4 @@
 tqdm
-requests
 Pillow
-download
 numpy>=1.17.0
 mindspore>=2.0.0

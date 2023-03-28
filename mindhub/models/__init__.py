@@ -1,7 +1,7 @@
 from . import model, registry
 
-from .model import Model
-from .registry import register_model, list_models, load_local_model, local_models, local_models_info, remove_models
+from .model import *
+from .registry import *
 
 __all__ = []
 __all__.extend(model.__all__)
