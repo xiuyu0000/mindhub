@@ -35,12 +35,22 @@ def _get_remote_models():
 
 
 def get_remote_models():
+    """Get the models name of remote repository"""
     return _get_remote_models()
 
 
 def load_local_model(module_name: str,
                      module_local_path: str,
                      ):
+    """ Load the local model file to the registry.
+
+    Args:
+        module_name(str): The name of module.
+        module_local_path(str): The path of file the module in.
+
+    Returns:
+        None
+    """
 
     sys.path.insert(0, module_local_path)
 
@@ -105,8 +115,14 @@ def local_models_info(local_model_name: str):
 
 
 def list_models(model_name_filter: str):
+    """List the models which are similar to the input name.
 
+    Args:
+        models_name_filter(str): The possible name of model.
 
+    Returns:
+        List, the list of matched models names.
+    """
     local_matched_models = [
         m for m in difflib.get_close_matches(
             model_name_filter, _local_models.keys(), n=1, cutoff=0.5)
