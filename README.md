@@ -14,8 +14,6 @@
 [快速入门](#快速入门) |
 [教程](#教程) |
 [模型列表](#模型列表) |
-[支持算法](#支持算法) |
-[日志](#日志)
 
 </div>
 
@@ -207,30 +205,32 @@ Data Path: ~/data/Canidae/val/dogs/
 
 示例中的模型要进行推理只需要输入图片所在的路径和标签对应表所在的路径，就可以正常输出推理结果。
 
-## 社区
+## 教程
+我们提供了相关教程，帮助用户学习如何使用和贡献MindHub
 
-MindHub是MindSpore社区的一部分，关于社区的交流、贡献与治理内容与MindSpore社区一致。
+- [自定义模型教程](tutorials/custom_model.md)
 
-### 治理
+### 模型列表
 
-查看MindSpore如何进行[开放治理](https://gitee.com/mindspore/community/blob/master/governance.md)。
+目前，MindHub支持以下模型。
 
-### 交流
+<details open>
+<summary> 支持模型 </summary>
 
-- [MindSpore Slack](https://join.slack.com/t/mindspore/shared_invite/zt-dgk65rli-3ex4xvS4wHX7UDmsQmfu8w) 开发者交流平台。
-- `#mindspore` IRC频道（仅用于会议记录）
-- 视频会议：待定
-- 邮件列表：<https://mailweb.mindspore.cn/postorius/lists>
+<details open>
+<summary> 图像分类 </summary>
+
+- TinyDarkNet - https://pjreddie.com/darknet/tiny-darknet/
+
+</details>
+
+</details>
 
 ## 贡献
 
 欢迎开发者用户提issue或提交代码PR，或贡献更多的算法和模型，一起让MindHub变得更好。
 
 有关贡献指南，请参阅[CONTRIBUTING](CONTRIBUTING.md)。请遵循[自定义模型模型教程](tutorials/custom_model.md)所规定的规则来贡献模型接口：)
-
-## 版本说明
-
-版本说明请参阅[RELEASE](RELEASE.md)。
 
 ## 许可证
 
