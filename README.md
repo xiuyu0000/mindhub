@@ -46,10 +46,11 @@ pip install -r requirements.txt
 
 ### 源码安装
 
-Git上最新的MindCV可以通过以下指令安装。
+Github上最新的MindCV可以通过以下指令安装。
 
 ```shell
-pip install git+https://github.com/xiuyu0000/mindhub.git
+pip install pip install https://github.com/xiuyu0000/mindhub/releases/download/v0.0.1/mindhub-0.0.1-py3-none-any.whl
+
 ```
 
 ## 快速入门
@@ -64,9 +65,9 @@ pip install git+https://github.com/xiuyu0000/mindhub.git
 MindHub提供了`list_models`接口，通过输出的可能的模型名称模糊匹配本地和远程仓库中的模型名称，返回可能的模型名称的列表，供用户做进一步判断。
 
 ```python
-import mindhub
+import mindhub as hub
 # 列出满足条件的预训练模型名称
-mindhub.models.list_models("tinydarknet")
+hub.list_models("tinydarknet")
 ```
 
 ```text
@@ -82,7 +83,7 @@ Matching remote models: ['tinydarknet_imagenet']
 MindHub提供了`install_model`接口，来安装所需模型。
 
 ```python
-mindhub.models.Model.install_model("tinydarknet_imagenet")
+hub.Model.install_model("tinydarknet_imagenet")
 ```
 
 ```text
@@ -100,7 +101,7 @@ tinydarknet_imagenet is not installed!
 同时MindHub还提供了`local_models_info`接口，可以进一步查看本地模型的详细信息。
 
 ```python
-print(mindhub.models.local_models_info("tinydarknet_imagenet"))
+print(hub.local_models_info("tinydarknet_imagenet"))
 ```
 
 ```text
@@ -115,7 +116,7 @@ print(mindhub.models.local_models_info("tinydarknet_imagenet"))
 对于已经安装的不需要的模型，MindHub提供了`remove_model`接口，在本地模型注册表中删除该模型，并删除对应的模型文件。
 
 ```python
-mindhub.models.Model.remove_model("tinydarknet_imagenet")
+hub.Model.remove_model("tinydarknet_imagenet")
 ```
 
 ```text
@@ -134,8 +135,8 @@ MindHub提供了`Model`类，可以通过加载本地模型文件或者模型名
 请参阅[自定义模型教程](tutorials/custom_model.md)）以及是否需要下载预训练模型。
 
 ```python
-net = mindhub.models.Model(model_name="tinydarknet_imagenet", 
-                           diretory="{YOUR_PATH}/tinydarknet_imagenet/", pretrained=True)
+net = hub.Model(model_name="tinydarknet_imagenet", 
+                diretory="{YOUR_PATH}/tinydarknet_imagenet/", pretrained=True)
 ```
 
 ```text
@@ -152,7 +153,7 @@ Successfully downloaded file to ./tinydarknet_ascend_v190_imagenet2012_official_
 通过输入模型名称加载，只需要输入模型名称以及是否需要下载预训练模型。
 
 ```python
-net = mindhub.models.Model(model_name="tinydarknet_imagenet", pretrained=True)
+net = hub.models.Model(model_name="tinydarknet_imagenet", pretrained=True)
 ```
 
 ```text
@@ -180,14 +181,13 @@ Successfully downloaded file to ./tinydarknet_ascend_v190_imagenet2012_official_
 推理是MindHub中的模型所要求的基本功能，根据贡献者定义的方法来进行推理。
 
 ```python
-from mindhub.utils import DownLoad
 import os
 
 dataset_url = "https://mindspore-website.obs.cn-north-4.myhuaweicloud.com/notebook/datasets/intermediate/Canidae_data.zip"
 root_dir = "./"
 
 if not os.path.exists(os.path.join(root_dir, 'data/Canidae')):
-    DownLoad().download_and_extract_archive(dataset_url, root_dir)
+    hub.DownLoad().download_and_extract_archive(dataset_url, root_dir)
 
 print(net.infer(data_path="./data/Canidae/val/dogs/", json_path="/tinydarknet_imagenet/label_map.json"))
 ```

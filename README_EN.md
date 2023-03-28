@@ -48,7 +48,7 @@ The following instructions assume that the user has correctly installed the rele
 The latest MindCV on GitHub can be installed using the following command.
 
 ```shell
-pip install git+https://github.com/xiuyu0000/mindhub.git
+pip install https://github.com/xiuyu0000/mindhub/releases/download/v0.0.1/mindhub-0.0.1-py3-none-any.whl
 ```
 
 ## Get Started
@@ -62,9 +62,9 @@ Here are some code examples for you to quickly experience.
 MindHub provides the `list_models` interface to search for models. By outputting the possible model names that match the model name, it returns a list of possible model names in the local and remote repositories for users to make further judgments.
 
 ```python
-import mindhub
+import mindhub as hub
 # List the pre-trained model names that meet the conditions
-mindhub.models.list_models("tinydarknet")
+hub.list_models("tinydarknet")
 ```
 
 ```text
@@ -80,7 +80,7 @@ In the example, `tinydarknet` searched does not match locally, but matches `tiny
 MindHub provides the `install_model` interface to install the required model.
 
 ```python
-mindhub.models.Model.install_model("tinydarknet_imagenet")
+hub.Model.install_model("tinydarknet_imagenet")
 ```
 
 ```text
@@ -98,7 +98,7 @@ tinydarknet_imagenet is not installed!
 At the same time, MindHub also provides the `local_models_info` interface, which can further view the detailed information of local models.
 
 ```python
-print(mindhub.models.local_models_info("tinydarknet_imagenet"))
+print(hub.local_models_info("tinydarknet_imagenet"))
 ```
 
 ```text
@@ -112,7 +112,7 @@ In the example, since `tinydarknet` was discovered during model search, the requ
 For unwanted models that have been installed, MindHub provides the `remove_model` interface to delete the model from the local model registry and delete the corresponding model file.
 
 ```python
-mindhub.models.Model.remove_model("tinydarknet_imagenet")
+hub.Model.remove_model("tinydarknet_imagenet")
 ```
 
 ```text
@@ -130,8 +130,8 @@ MindHub provides a `Model` class that allows loading the required models by eith
 To load a local model file, the user needs to input the required model name, the directory path of the model file (For more details on the model file, please refer to the [Custom Model Tutorial](tutorials/custom_model.md)) and whether to download the pre-trained model.
 
 ```python
-net = mindhub.models.Model(model_name="tinydarknet_imagenet", 
-                           directory="{YOUR_PATH}/tinydarknet_imagenet/", pretrained=True)
+net = hub.Model(model_name="tinydarknet_imagenet", 
+                directory="{YOUR_PATH}/tinydarknet_imagenet/", pretrained=True)
 ```
 
 ```text
@@ -148,7 +148,7 @@ In the above example, the `tinydarknet_imagenet` model is loaded from the `./tin
 To load a model by name, the user only needs to input the model name and whether to download the pre-trained model.
 
 ```python
-net = mindhub.models.Model(model_name="tinydarknet_imagenet", pretrained=True)
+net = hub.Model(model_name="tinydarknet_imagenet", pretrained=True)
 ```
 
 ```text
@@ -175,14 +175,13 @@ In the above example, the model search matches that the model is not registered 
 Inference is the fundamental requirement of the models in MindHub and is performed according to the method.
 
 ```python
-from mindhub.utils import DownLoad
 import os
 
 dataset_url = "https://mindspore-website.obs.cn-north-4.myhuaweicloud.com/notebook/datasets/intermediate/Canidae_data.zip"
 root_dir = "./"
 
 if not os.path.exists(os.path.join(root_dir, 'data/Canidae')):
-    DownLoad().download_and_extract_archive(dataset_url, root_dir)
+    hub.DownLoad().download_and_extract_archive(dataset_url, root_dir)
 
 print(net.infer(data_path="./data/Canidae/val/dogs/", json_path="/tinydarknet_imagenet/label_map.json"))
 ```
