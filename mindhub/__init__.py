@@ -1,8 +1,8 @@
 from mindhub import env, models, utils
 
 from .env import *
-from models import *
-from utils import *
+from .models import *
+from .utils import *
 
 __all__ = []
 
