@@ -24,13 +24,7 @@ Tiny-DarkNet是Joseph Chet Redmon等人提出的一个16层的针对于经典的
 
 <!-- Dataset used: [CIFAR-10](<http://www.cs.toronto.edu/~kriz/cifar.html>)  -->
 
-<!-- Dataset used ImageNet can refer to [paper](<https://ieeexplore.ieee.org/abstract/document/5206848>)
-
-- Dataset size: 125G, 1250k colorful images in 1000 classes
-  - Train: 120G, 1200k images
-  - Test: 5G, 50k images
-- Data format: RGB images.
-  - Note: Data will be processed in src/dataset.py  -->
+<!-- Dataset used ImageNet can refer to [paper](<https://ieeexplore.ieee.org/abstract/document/5206848>) -->
 
 所使用的数据集可参考[论文](<https://ieeexplore.ieee.org/abstract/document/5206848>)
 
@@ -38,12 +32,12 @@ Tiny-DarkNet是Joseph Chet Redmon等人提出的一个16层的针对于经典的
     - 训练集: 120G,1200k张图片
     - 测试集: 5G, 50k张图片
 - 数据格式: RGB格式图片
-    - 注意: 数据将会被 src/dataset.py 中的函数进行处理
+    - 注意: 数据将会被 preprocess.py 中的函数进行处理
 
 ## [环境要求](#目录)
 
 - 硬件
-    - 请准备具有GPU的硬件环境.
+    - 请准备具有GPU/CPU的硬件环境.
 - 框架
     - [MindSpore](https://www.mindspore.cn/install)
 - 更多的信息请访问以下链接：
@@ -59,37 +53,41 @@ Tiny-DarkNet是Joseph Chet Redmon等人提出的一个16层的针对于经典的
 ```text
 ./tinydarknet
 ├── data
-│   └── n02090622_8464.JPEG
-├── mindspore_hub_conf.py
+│    └── infer_example.JPEG
+├── hub_conf.py
 ├── model.py
 ├── preprocess.py
 ├── label_map.json
 └── README.md
 ```
 
-### GPU单卡推理示例
+### 推理示例
 
-- python代码运行
+- 加载`tinydarknet_imagenet`模型并使用`infer`接口进行推理。
 
 ```python
-from mindhub.models.model import Model
+import mindhub as hub
 
-net = Model("tinydarknet_imagenet", pretrained=True)
-print(net.infer(data_path="./data/", json_path="./label_map.json"))
-```
-
-- 命令行运行
-```shell
-python mindspore_hub_conf.py
+net = hub.Model("tinydarknet_imagenet", pretrained=True)
+print(net.infer(data_path="./data/infer_example.JPEG", json_path="./label_map.json"))
 ```
 
 ```text
-data_path: ./data/infer
-Create Dataset Sucessfully! Dataset Size: 1
+Matching local models: []
+Matching remote models: ['tinydarknet_imagenet']
+tinydarknet_imagenet is not installed!
+4096B [00:00, 2369637.13B/s]           
+20480B [00:00, 6247225.16B/s]           
+4096B [00:00, 1779006.85B/s]           
+5120B [00:00, 2905538.69B/s]           
+4096B [00:00, 2582274.04B/s]           
 Downloading data from https://download.mindspore.cn/models/r1.9/tinydarknet_ascend_v190_imagenet2012_official_cv_top1acc59.0_top5acc81.84.ckpt (10.4 MB)
 
-file_sizes: 100%|██████████████████████████| 10.9M/10.9M [00:00<00:00, 16.1MB/s]
+file_sizes: 100%|██████████████████████████| 10.9M/10.9M [00:00<00:00, 23.1MB/s]
 Successfully downloaded file to ./tinydarknet_ascend_v190_imagenet2012_official_cv_top1acc59.0_top5acc81.84.ckpt
-Create Model Sucessfully!
-output: {175: 'otterhound'}
+Data Path: ./data/infer_example.JPEG
+[{'275': 'African hunting dog'}]
 ```
+
+
+![infer_example](./data/infer_example.JPEG)

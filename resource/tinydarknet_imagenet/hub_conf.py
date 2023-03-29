@@ -41,7 +41,7 @@ class CrossEntropySmooth(LossBase):
                 paper="https://github.com/pjreddie/darknet",
                 pretrained=True)
 class TinyDarkNetImageNet:
-    """TinyDarkNet infer by using ImageNet data."""
+    """TinyDarkNet data by using ImageNet data."""
     def __init__(self,
                 model_name: str = "tinydarknet_imagenet",
                 pretrained: bool = False,

@@ -41,15 +41,15 @@ model_type: 'image/classification'
    ├── label_map.json
    ├── model.py
    ├── preprocess.py
-   └── mindspore_hub_conf.py
+   └── hub_conf.py
    ```
 
-2. 其中`README.md`和`mindspore_hub_conf.py`两个文件是必须的。
+2. 其中`README.md`和`hub_conf.py`两个文件是必须的。
    - `README.md`中需要对模型的基本信息进行描述，至少要包括模型的基本介绍，benchmark, 模型的安装和使用方法。
-   - `mindspore_hub_conf.py`的作用是实例化模型和数据集并执行注册器，将模型注册到用户的本地模型注册表中。该文件的名称不可改变，否则将无法正常
+   - `hub_conf.py`的作用是实例化模型和数据集并执行注册器，将模型注册到用户的本地模型注册表中。该文件的名称不可改变，否则将无法正常
    加载模型。模型和数据集的实例化方式没有严格的限制，如果模型较为简单可以直接在该文件中进行定义，如果模型较为复杂且包含多个规格可以参照示例中的做法，
-   创建一个`model.py`文件并对定义的模型在`mindspore_hub_conf.py`中进行引用。同理数据集也参照这个原则，如果不复杂直接在`mindspore_hub_conf.py`中
-   进行定义，如果复杂可以参照示例创建`preprocess.py`来定义数据集接口，并在`mindspore_hub_conf.py`中引用。
+   创建一个`model.py`文件并对定义的模型在`hub_conf.py`中进行引用。同理数据集也参照这个原则，如果不复杂直接在`hub_conf.py`中
+   进行定义，如果复杂可以参照示例创建`preprocess.py`来定义数据集接口，并在`hub_conf.py`中引用。
    - 另外，`label_map.json`是imagenet数据集分类序号和类别名称的对应表。
    
    > 注: MindHub推荐使用最简洁的方式来实现功能，希望开发者在贡献模型时以最少的代码做模型加载和模型推理，例如，示例中imagenet数据集的分类序号和
@@ -68,7 +68,7 @@ from mindhub import register_model
                 paper="https://github.com/pjreddie/darknet",
                 pretrained=True)
 class TinyDarkNetImageNet:
-    """TinyDarkNet infer by using ImageNet data."""
+    """TinyDarkNet data by using ImageNet data."""
     def __init__(self,
                 model_name: str = "tinydarknet_imagenet",
                 pretrained: bool = False,
@@ -84,7 +84,7 @@ class TinyDarkNetImageNet:
 
 ```python
 class TinyDarkNetImageNet:
-    """TinyDarkNet infer by using ImageNet data."""
+    """TinyDarkNet data by using ImageNet data."""
     def __init__(self,
                 model_name: str = "tinydarknet_imagenet",
                 pretrained: bool = False,
@@ -177,4 +177,4 @@ class TinyDarkNetImageNet:
 
 </details>
 
-> 完整代码请参阅[mindspore_hub_conf.py](https://github.com/xiuyu0000/mindhub/blob/main/resource/tinydarknet_imagenet/mindspore_hub_conf.py)。
+> 完整代码请参阅[hub_conf.py](https://github.com/xiuyu0000/mindhub/blob/main/resource/tinydarknet_imagenet/hub_conf.py)。

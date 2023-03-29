@@ -55,7 +55,7 @@ def load_local_model(module_name: str,
     sys.path.insert(0, module_local_path)
 
     # Load the module from the specified file path
-    spec = spec_from_file_location(module_name, os.path.join(module_local_path, "mindspore_hub_conf.py"))
+    spec = spec_from_file_location(module_name, os.path.join(module_local_path, "hub_conf.py"))
     model_module = module_from_spec(spec)
     spec.loader.exec_module(model_module)
 
