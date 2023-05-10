@@ -21,6 +21,7 @@ from preprocess import create_dataset_imagenet_infer
 
 class CrossEntropySmooth(LossBase):
     """CrossEntropy"""
+
     def __init__(self, sparse=True, reduction='mean', smooth_factor=0., num_classes=1000):
         super(CrossEntropySmooth, self).__init__()
         self.onehot = ops.OneHot()
@@ -42,13 +43,14 @@ class CrossEntropySmooth(LossBase):
                 pretrained=True)
 class TinyDarkNetImageNet:
     """TinyDarkNet trained by using ImageNet."""
+
     def __init__(self,
-                model_name: str = "tinydarknet_imagenet",
-                pretrained: bool = False,
-                weight_path: Optional[str] = None,
-                num_classes: int = 1000,
-                in_channel: int = 3,
-                label_smooth_factor: float = 0.1):
+                 model_name: str = "tinydarknet_imagenet",
+                 pretrained: bool = False,
+                 weight_path: Optional[str] = None,
+                 num_classes: int = 1000,
+                 in_channel: int = 3,
+                 label_smooth_factor: float = 0.1):
 
         self.network = TinyDarkNet(in_channel, num_classes) if model_name == "tinydarknet_imagenet" else None
         self.ckpt_url = "https://download.mindspore.cn/models/r1.9/tinydarknet_ascend_v190_imagenet2012" \
