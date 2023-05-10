@@ -271,22 +271,22 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>U-Net</td>
       <td><a href="https://arxiv.org/abs/1505.04597">U-Net: Convolutional Networks for Biomedical Image Segmentation</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>DeepLabV3</td>
       <td><a href="https://arxiv.org/abs/1706.05587v3">Rethinking Atrous Convolution for Semantic Image Segmentation</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>Mask R-CNN</td>
       <td><a href="https://arxiv.org/abs/1703.06870v3">Mask R-CNN</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>PointNet</td>
       <td><a href="https://arxiv.org/abs/1612.00593v2">PointNet: Deep Learning on Point Sets for 3D Classification and Segmentation</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Vision - Classification</b></td>
@@ -294,32 +294,32 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>tinydarknet</td>
       <td><a href="https://pjreddie.com/darknet/tiny-darknet/">Tiny Darknet</a></td>
-      <td>支持</td>
+      <td>:white_check_mark:</td>
     </tr>
     <tr>
       <td>resnet</td>
       <td><a href="https://arxiv.org/abs/1512.03385v1">Deep Residual Learning for Image Recognition</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>mobilenetv2</td>
       <td><a href="https://arxiv.org/abs/1801.04381v4">MobileNetV2: Inverted Residuals and Linear Bottlenecks</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>efficientnet</td>
       <td><a href="https://arxiv.org/abs/1905.11946v5">EfficientNet: Rethinking Model Scaling for Convolutional Neural Networks</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>cspnet</td>
       <td><a href="https://arxiv.org/abs/1911.11929v1">CSPNet: A New Backbone that can Enhance Learning Capability of CNN</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>vit</td>
       <td><a href="https://arxiv.org/abs/2010.11929v2">An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Vision - Face Verification</b></td>
@@ -327,17 +327,17 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>facenet</td>
       <td><a href="https://arxiv.org/abs/1503.03832v3">FaceNet: A Unified Embedding for Face Recognition and Clustering</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>arcface</td>
       <td><a href="https://arxiv.org/abs/1801.07698v4">ArcFace: Additive Angular Margin Loss for Deep Face Recognition</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>retinaface</td>
       <td><a href="https://arxiv.org/abs/1905.00641v2">RetinaFace: Single-stage Dense Face Localisation in the Wild</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Vision - Detection</b></td>
@@ -345,32 +345,32 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>yolov3</td>
       <td><a href="https://arxiv.org/abs/1804.02767v1">YOLOv3: An Incremental Improvement</a></td>
-      <td>暂未支持</td>
+      <td>:white_check_mark:</td>
     </tr>
     <tr>
       <td>yolov4</td>
       <td><a href="https://arxiv.org/abs/2004.10934v1">YOLOv4: Optimal Speed and Accuracy of Object Detection</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>yolov7</td>
       <td><a href="https://arxiv.org/abs/2207.02696v1">YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>detr</td>
       <td><a href="https://arxiv.org/abs/2005.12872v3">End-to-End Object Detection with Transformers</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>ssd</td>
       <td><a href="https://arxiv.org/abs/1512.02325v5">SSD: Single Shot MultiBox Detector</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>fast r-cnn</td>
       <td><a href="https://arxiv.org/abs/1504.08083v2">Fast R-CNN</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Vision - OCR</b></td>
@@ -378,12 +378,12 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>DBNet</td>
       <td><a href="https://arxiv.org/abs/2010.11566v1">DBNET: DOA-driven beamforming network for end-to-end farfield sound source separation</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>CRNN</td>
       <td><a href="https://arxiv.org/abs/1706.01069">CRNN: A Joint Neural Network for Redundancy Detection</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Vision - Video</b></td>
@@ -391,12 +391,12 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>fairmot</td>
       <td><a href="https://arxiv.org/abs/2004.01888v6">FairMOT: On the Fairness of Detection and Re-Identification in Multiple Object Tracking</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>swin3d</td>
       <td><a href="https://arxiv.org/abs/2106.13230v1">Video Swin Transformer</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Vision - 3D</b></td>
@@ -404,12 +404,12 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>second</td>
       <td><a href="https://arxiv.org/abs/2106.13230v1">Video Swin Transformer</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>PointNet++</td>
       <td><a href="https://arxiv.org/abs/1706.02413v1">PointNet++: Deep Hierarchical Feature Learning on Point Sets in a Metric Space</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Vision - 3D Restruction</b></td>
@@ -417,12 +417,12 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>DeepLM</td>
       <td><a href="http://openaccess.thecvf.com//content/CVPR2021/html/Huang_DeepLM_Large-Scale_Nonlinear_Least_Squares_on_Deep_Learning_Frameworks_Using_CVPR_2021_paper.html">DeepLM: Large-Scale Nonlinear Least Squares on Deep Learning Frameworks Using Stochastic Domain Decomposition</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>DecoMR</td>
       <td><a href="https://arxiv.org/abs/2006.05734v2">3D Human Mesh Regression with Dense Correspondence</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>NLP - Machine Translation</b></td>
@@ -430,12 +430,12 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>seq2seq</td>
       <td><a href="https://arxiv.org/abs/1409.3215v3">Sequence to Sequence Learning with Neural Networks</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>speech_transformer</td>
       <td><a href="https://ieeexplore.ieee.org/document/8682586">The Speechtransformer for Large-scale Mandarin Chinese Speech Recognition</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>NLP - Talking</b></td>
@@ -443,12 +443,12 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>dgu</td>
       <td><a href="https://github.com/PaddlePaddle/models/tree/release/1.6/PaddleNLP/PaddleDialogue">DGU: Dialogue General Understanding</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>dam</td>
       <td><a href="https://aclanthology.org/P18-1103.pdf">Multi-Turn Response Selection for Chatbots with Deep Attention Matching Network</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>NLP - Language Modeling</b></td>
@@ -456,18 +456,18 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>gpt-3</td>
       <td><a href="https://arxiv.org/abs/2005.14165v4">Language Models are Few-Shot Learners</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>pangu</td>
       <td><a href="https://arxiv.org/abs/2104.12369v1">PanGu-α
 : Large-scale Autoregressive Pretrained Chinese Language Models with Auto-parallel Computation</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>bert</td>
       <td><a href="https://arxiv.org/abs/1810.04805v2">BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Recommand - CTR</b></td>
@@ -475,17 +475,17 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>Wide & Deep</td>
       <td><a href="https://arxiv.org/abs/1606.07792v1">Wide & Deep Learning for Recommender Systems</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>DeepFM</td>
       <td><a href="https://arxiv.org/abs/1804.04950v2">DeepFM: An End-to-End Wide & Deep Learning Framework for CTR Prediction</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>EDCN</td>
       <td><a href="https://dl.acm.org/doi/abs/10.1145/3459637.3481915">Enhancing Explicit and Implicit Feature Interactions via Information Sharing for Parallel Deep CTR Models</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Audio - Speech Recognition</b></td>
@@ -493,12 +493,12 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>conformer</td>
       <td><a href="https://arxiv.org/abs/2005.08100v1">Conformer: Convolution-augmented Transformer for Speech Recognition</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>deepspeechv2</td>
       <td><a href="https://arxiv.org/abs/1512.02595v1">Deep Speech 2: End-to-End Speech Recognition in English and Mandarin</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
 	<td colspan=6 align="center"><b>Generation - Image Generation</b></td>
@@ -506,17 +506,17 @@ Data Path: ./data/Canidae/val/dogs/
     <tr>
       <td>dcgan</td>
       <td><a href="https://arxiv.org/abs/1511.06434v2">Unsupervised Representation Learning with Deep Convolutional Generative Adversarial Networks</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>stable diffusion v2</td>
       <td><a href="https://openaccess.thecvf.com/content/CVPR2022/html/Rombach_High-Resolution_Image_Synthesis_With_Latent_Diffusion_Models_CVPR_2022_paper.html">High-Resolution Image Synthesis with Latent Diffusion Models</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
     <tr>
       <td>wukong-huahua</td>
       <td><a href="https://github.com/mindspore-lab/minddiffusion/tree/main/vision/wukong-huahua">Wukong-Huahua</a></td>
-      <td>暂未支持</td>
+      <td>:x:</td>
     </tr>
   </tbody>
 </table>

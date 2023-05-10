@@ -87,7 +87,7 @@ Replace is False and data exists, so doing nothing. Use replace=True to re-downl
 yolov3 pretrained network model: ./yolov3darknet53shape416_ascend_v190_coco2014_official_cv_map31.8.ckpt
 ([], ['global_step', 'momentum', 'learning_rate'])
 load_model ./yolov3darknet53shape416_ascend_v190_coco2014_official_cv_map31.8.ckpt success
-No.1 image inference result has been saved in C:\Users\huxiuyu/.mindhub/yolov3darknet53_coco2014/outputs\infer_example.JPEG
+No.1 image inference result has been saved in {YOUR_SAVE_PATH}/{YOUT_IMG_NAME}
 Predict Result: [{'category': 'teddy bear', 'bbox': [61.15129852294922, 86.04826354980469, 149.5635223388672, 165.72116088867188], 'score': 0.8068623542785645}, {'category': 'couch', 'bbox': [37.03752136230469, 39.58436584472656, 420.7580871582031, 289.9647521972656], 'score': 0.6560181975364685}, {'category': 'dog', 'bbox': [11.676925659179688, 45.679168701171875, 412.79302978515625, 278.7406005859375], 'score': 0.28594887256622314}].
 ```
 
