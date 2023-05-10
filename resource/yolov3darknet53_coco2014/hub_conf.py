@@ -43,7 +43,7 @@ class YoloV3DarkNet53COCO2014:
                         "v190_coco2014_official_cv_map31.8.ckpt"
         self.ckpt_path = "./yolov3darknet53shape416_ascend_v190_coco2014_official_cv_map31.8.ckpt"
 
-        if not weight_path:
+        if weight_path:
             load_parameters(self.network, weight_path)
         elif pretrained:
             path = download(self.ckpt_url, self.ckpt_path, replace=False)
