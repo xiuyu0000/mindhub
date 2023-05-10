@@ -45,6 +45,7 @@ class TinyDarkNetImageNet:
     def __init__(self,
                 model_name: str = "tinydarknet_imagenet",
                 pretrained: bool = False,
+                weight_path: Optional[str] = None,
                 num_classes: int = 1000,
                 in_channel: int = 3,
                 label_smooth_factor: float = 0.1):
@@ -55,10 +56,13 @@ class TinyDarkNetImageNet:
         self.ckpt_path = "./tinydarknet_ascend_v190_imagenet2012_official_cv" \
                          "_top1acc59.0_top5acc81.84.ckpt"
 
-        if pretrained:
+        if not weight_path:
+            param_dict = ms.load_checkpoint(weight_path)
+            print(ms.load_param_into_net(self.network, param_dict))
+        elif pretrained:
             path = download(self.ckpt_url, self.ckpt_path, replace=True)
             param_dict = ms.load_checkpoint(path)
-            ms.load_param_into_net(self.network, param_dict)
+            print(ms.load_param_into_net(self.network, param_dict))
 
         self.loss = CrossEntropySmooth(sparse=True,
                                        reduction="mean",

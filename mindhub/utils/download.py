@@ -199,6 +199,7 @@ class DownLoad:
     def download_github_folder(self,
                                folder_path: str,
                                download_path: Optional[str] = None,
+                               loop: int = 0,
                                ) -> str:
         """
         Download the code of model.
@@ -212,10 +213,11 @@ class DownLoad:
         """
         if download_path is None:
             download_path = get_default_download_root()
-        download_path = os.path.join(os.path.expanduser(download_path), folder_path)
+        if loop == 0:
+            download_path = os.path.join(os.path.expanduser(download_path), folder_path)
+            os.makedirs(os.path.realpath(download_path), exist_ok=True)
 
         # 解析仓库地址和文件夹路径
-
         repo_url = urllib.parse.urljoin(GITHUB_REPO_URL, folder_path)
 
         # 获取文件列表
@@ -223,16 +225,15 @@ class DownLoad:
 
         # 下载文件
         try:
-            os.makedirs(download_path, exist_ok=True)
             for file_info in file_list:
                 if file_info["type"] == "file":
                     file_url = file_info["download_url"]
                     self.download_url(file_url, download_path)
                 elif file_info["type"] == "dir":
-                    subfolder_path = os.path.join(folder_path, file_info["name"])
+                    subfolder_path = os.path.join(folder_path, file_info["name"]).replace("\\", "/")
                     subfolder_download_path = os.path.join(download_path, file_info["name"])
-                    os.makedirs(subfolder_download_path, exist_ok=True)
-                    self.download_github_folder(subfolder_path, subfolder_download_path)
+                    os.makedirs(os.path.realpath(subfolder_download_path), exist_ok=True)
+                    self.download_github_folder(subfolder_path, subfolder_download_path, loop + 1)
         except Exception as e:
             shutil.rmtree(download_path)
             raise e
