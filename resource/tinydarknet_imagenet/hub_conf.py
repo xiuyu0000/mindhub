@@ -56,7 +56,7 @@ class TinyDarkNetImageNet:
         self.ckpt_path = "./tinydarknet_ascend_v190_imagenet2012_official_cv" \
                          "_top1acc59.0_top5acc81.84.ckpt"
 
-        if not weight_path:
+        if weight_path:
             param_dict = ms.load_checkpoint(weight_path)
             print(ms.load_param_into_net(self.network, param_dict))
         elif pretrained:
