@@ -108,7 +108,6 @@ class DownLoad:
     def download_file(self, url: str, file_path: str, chunk_size: int = 1024):
         """Download a file."""
         # Define request headers.
-
         _logger.info(f"Downloading from {url} to {file_path} ...")
         with open(file_path, "wb") as f:
             request = urllib.request.Request(url, headers=self.HEADER)
@@ -126,7 +125,7 @@ class DownLoad:
             path: Optional[str] = None,
             filename: Optional[str] = None,
             md5: Optional[str] = None,
-            ) -> None:
+    ) -> None:
         """Download a file from a url and place it in root."""
         if path is None:
             path = get_default_download_root()

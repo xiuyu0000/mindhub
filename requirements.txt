@@ -1,4 +1,7 @@
-tqdm
-Pillow
+tqdm~=4.64.1
+Pillow~=9.2.0
 numpy>=1.17.0
 mindspore>=2.0.0
+opencv-python>=4.7.0.68
+requests~=2.28.1
+setuptools~=63.4.1
