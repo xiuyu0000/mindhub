@@ -53,7 +53,7 @@ class YoloV3DarkNet53COCO2014:
         os.makedirs(outputs_dir, exist_ok=True)
         self.network.set_train(False)
         infer_dataset, file_names = create_yolo_infer_dataset(data_dir, batch_size=batch_size)
-
+        res = []
         for i, (img, image_shape) in enumerate(infer_dataset.create_tuple_iterator()):
             output_l, output_m, output_s = self.network(img)
             output_l = output_l.asnumpy()
@@ -69,6 +69,8 @@ class YoloV3DarkNet53COCO2014:
                 detection.save_bbox_img(img_ori, save_path)
                 print(f'No.{i * batch_size + bi + 1} image inference result has been saved in {save_path}\n'
                       f'Predict Result: {detection.det_boxes}.')
+                res.append({"det_boxes": detection.det_boxes, "output_save_path": save_path})
+        return res
 
 
 if __name__ == '__main__':
@@ -77,4 +79,4 @@ if __name__ == '__main__':
     batch_size = 1
     os.makedirs(outputs_dir, exist_ok=True)
     model = YoloV3DarkNet53COCO2014(pretrained=True)
-    model.infer(data_path, outputs_dir, batch_size=2)
+    outputs_info = model.infer(data_path, outputs_dir, batch_size=2)
