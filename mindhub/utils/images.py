@@ -57,7 +57,7 @@ def image_read(image: str) -> np.array:
     Read an image.
 
     Args:
-        image (ndarray or str or Path): Ndarry, str or pathlib.Path.
+        image (ndarray or str or Path): Ndarray, str or pathlib.Path.
 
     Returns:
         ndarray: Loaded image array.
