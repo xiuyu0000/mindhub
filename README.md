@@ -274,9 +274,14 @@ Data Path: ./data/Canidae/val/dogs/
       <td>:x:</td>
     </tr>
     <tr>
-      <td>DeepLabV3</td>
-      <td><a href="https://arxiv.org/abs/1706.05587v3">Rethinking Atrous Convolution for Semantic Image Segmentation</a></td>
-      <td>:x:</td>
+      <td>DeepLabV3+</td>
+      <td><a href="https://arxiv.org/abs/1802.02611">Encoder-decoder with atrous separable convolution for semantic image segmentation.</a></td>
+      <td>:white_check_mark:</td>
+    </tr>
+    <tr>
+      <td>FCN8s</td>
+      <td><a href="https://arxiv.org/abs/1411.4038">Fully convolutional networks for semantic segmentation.</a></td>
+      <td>:white_check_mark:</td>
     </tr>
     <tr>
       <td>Mask R-CNN</td>
