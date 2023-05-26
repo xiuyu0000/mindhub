@@ -46,11 +46,9 @@ class DeepLabV3PlusMobileNetV2VOC2012:
         self.net = DeepLab(num_classes, downsample_factor=output_stride) \
             if model_name == "deeplabv3p_mobilenetv2_voc2012" else None
 
-        self.ckpt_url = "https://download.mindspore.cn/models/r1.9/deeplabv3plus_s16_ascend_v190_voc2012_" \
-                        "research_cv_s16acc79.06_s16multiscale79.96_s16multiscaleflip80.12.ckpt"
-        if output_stride == 8:
-            self.ckpt_url = "https://download.mindspore.cn/models/r1.9/deeplabv3plus_s8r2_ascend_v190_voc2012_" \
-                            "research_cv_s8acc79.62_s8multiscale80.32_s8multiscaleflip80.61.ckpt"
+        self.ckpt_url = "https://raw.githubusercontent.com/xiuyu0000/mindhub/main/resource/" \
+                        "weight_files/deeplab_mobilenetv2.ckpt"
+
         self.ckpt_path = f"./{os.path.basename(self.ckpt_url)}"
 
         if weight_path:
@@ -100,7 +98,8 @@ class DeepLabV3PlusMobileNetV2VOC2012:
                             output_image[res != cls] = [255, 255, 255]
                             output_image = Image.fromarray(output_image)
                             output_image.save(os.path.join(output_path, f"{NAME_CLASSES[cls]}_{filenames[ri]}"))
-                        print(f"{filename} has been segmented to classes: {[NAME_CLASSES[r] for r in t_classes if r != 0]}.")
+                        print(
+                            f"{filename} has been segmented to classes: {[NAME_CLASSES[r] for r in t_classes if r != 0]}.")
                     else:
                         print(f"{filename} has no target classes.")
                 batch_imgs = []
@@ -109,4 +108,4 @@ class DeepLabV3PlusMobileNetV2VOC2012:
 
 if __name__ == "__main__":
     model = DeepLabV3PlusMobileNetV2VOC2012(weight_path="./deeplab_mobilenetv2.ckpt", output_stride=16)
-    model.infer("./data/", "./outputs/", scales=(0.5, 0.75, 1.0, 1.25, 1.5, 1.75))
+    model.infer("./data/", "./outputs/", scales=(1.,))
